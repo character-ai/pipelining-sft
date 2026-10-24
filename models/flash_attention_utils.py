@@ -80,7 +80,7 @@ def _upad_input(
     indices_k, cu_seqlens_k, max_seqlen_in_batch_k = _get_unpad_data(attention_mask)
 
     # With static caches, the k/v states may be larger than the mask -> we need to slice them to avoid generating garbage
-    # It's a bit of an anti-pattern, but otherwise we silently compute wrong attentions scores
+    # It's a bit of an anti-pattern, but otherwise we silently compute wrong attention scores
     if key_layer.shape[1] > (seq_len := attention_mask.shape[-1]):
         key_layer, value_layer = key_layer[:, :seq_len, :, :], value_layer[:, :seq_len, :, :]
 
